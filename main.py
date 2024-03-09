@@ -10,10 +10,12 @@ packages = []
 bills = []
 
 while True:
+    print(users)
+    print(packages)
+    print(bills)
     print("Si desea registrar una cuenta de usuario, ingrese - 1 -\n\nSi desea registrar los datos para una factura electrónica, ingrese - 2 -\n\nSi desea agregar los datos para crear su paquete, ingrese - 3 -\n")
 
     option = int(input("Ingrese una opción: "))
-    print(option)
     if option == 1:
         new_user = gen_inputs_to_dict(User)
         users.append(new_user)
@@ -25,3 +27,4 @@ while True:
         packages.append(new_package)
     else:
         print("Usted ha ingresado un número incorrecto")
+
