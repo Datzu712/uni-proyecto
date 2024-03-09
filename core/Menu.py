@@ -1,3 +1,4 @@
+
 print("Bienvenido a la Mensajería Fidélitas")
 print("Si desea registrar una cuenta de usuario, ingrese - 1 -\n\nSi desea registrar los datos para una factura electrónica, ingrese - 2 -\n\nSi desea agregar los datos para crear su paquete, ingrese - 3 -:")
 
