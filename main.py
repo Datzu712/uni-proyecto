@@ -3,6 +3,7 @@ import os
 from core.input_helper import gen_input_to_list
 from structures.guia import guia_questions
 from structures.package import package_questions
+from structures.user import user_questions
 
 def clear_console():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -22,9 +23,18 @@ while True:
     print("2. Ingresar un nuevo paquete")
     print("3. Ingresar una nueva factura")
     print("4. Salir\n")
+   
+    option = input()
+   
+    if option == "1":     
+        clear_console()
+        print('[CREACION DE USUARIO]')
+        new_user = gen_input_to_list(user_questions)
+        users.append(new_user)
+        clear_console()
+        print('[USUARIO CREADO]')
 
-    option = int(input())
-    if option == 2:
+    elif option == "2":
         clear_console()
         print('[CREACION PAQUETE]')
         new_package = gen_input_to_list(package_questions)
@@ -45,17 +55,15 @@ while True:
         guias.append(new_guia)
         clear_console()
         print('[PAQUETE CREADO]')
+        
     else:
         clear_console()
         print("Usted ha ingresado un número incorrecto")
-    # if option == 1:
-    #     new_user = gen_inputs_to_dict(User)
-    #     users.append(new_user)
-    # if option == 2:
-    #     new_bill = gen_inputs_to_dict(ElectronicBill)
-    #     bills.append(new_bill)
-    # if option == 3:
-    #     new_package = gen_inputs_to_dict(Package)
-    #     packages.append(new_package)
-    #else:
-        #print("Usted ha ingresado un número incorrecto")
+    
+    
+    
+
+
+
+
+   
