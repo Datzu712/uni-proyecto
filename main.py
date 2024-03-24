@@ -4,6 +4,8 @@ from core.input_helper import gen_input_to_list
 from structures.guia import guia_questions
 from structures.package import package_questions
 from structures.user import user_questions
+from structures.electronic_bill import electronic_bill_questions
+
 
 def clear_console():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -59,7 +61,7 @@ while True:
     elif option == "3":     
         clear_console()
         print('[CREACION DE FACTURA ELECTRONICA]')
-        new_bill = gen_input_to_list(electronic_bill_questions)
+        new_electronic_bill = gen_input_to_list(electronic_bill_questions)
         bills.append(new_electronic_bill)
         clear_console()
         print('[FACTURA ELECTRONICA CREADA]')
