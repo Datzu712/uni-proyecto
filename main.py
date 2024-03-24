@@ -55,7 +55,9 @@ while True:
         guias.append(new_guia)
         clear_console()
         print('[PAQUETE CREADO]')
-        
+    elif option == '4':
+        print('Saliendo...')
+        break
     else:
         clear_console()
         print("Usted ha ingresado un número incorrecto")
