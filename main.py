@@ -56,7 +56,7 @@ while True:
         clear_console()
         print('[PAQUETE CREADO]')
 
-    if option == "3":     
+    elif option == "3":     
         clear_console()
         print('[CREACION DE FACTURA ELECTRONICA]')
         new_bill = gen_input_to_list(electronic_bill_questions)
