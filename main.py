@@ -1,29 +1,61 @@
-# from core.input_helper import gen_inputs_to_dict
-# from structures.user import User
-# from structures.electronic_bill import ElectronicBill
-# from structures.package import Package
+import os
 
-# print("Bienvenido a la Mensajería Fidélitas\n")
+from core.input_helper import gen_input_to_list
+from structures.guia import guia_questions
+from structures.package import package_questions
 
-# users = []
-# packages = []
-# bills = []
+def clear_console():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
-# while True:
-#     print(users)
-#     print(packages)
-#     print(bills)
-#     print("Si desea registrar una cuenta de usuario, ingrese - 1 -\n\nSi desea registrar los datos para una factura electrónica, ingrese - 2 -\n\nSi desea agregar los datos para crear su paquete, ingrese - 3 -\n")
+users = []
+packages = []
+bills = []
+guias = []
 
-#     option = int(input("Ingrese una opción: "))
-#     if option == 1:
-#         new_user = gen_inputs_to_dict(User)
-#         users.append(new_user)
-#     if option == 2:
-#         new_bill = gen_inputs_to_dict(ElectronicBill)
-#         bills.append(new_bill)
-#     if option == 3:
-#         new_package = gen_inputs_to_dict(Package)
-#         packages.append(new_package)
-#     else:
-#         print("Usted ha ingresado un número incorrecto")
+num_autoincremental = 0
+
+while True:
+    print(packages)
+    print(guias)
+    print("Bienvenido a la Mensajería Fidélitas\n")
+    print("1. Ingresar un nuevo usuario")
+    print("2. Ingresar un nuevo paquete")
+    print("3. Ingresar una nueva factura")
+    print("4. Salir\n")
+
+    option = int(input())
+    if option == 2:
+        clear_console()
+        print('[CREACION PAQUETE]')
+        new_package = gen_input_to_list(package_questions)
+        clear_console()
+        print('[CREACION DE LA GUIA]')
+        new_guia = gen_input_to_list(guia_questions)
+        num_autoincremental += 1
+
+        # Se le agrega la ID a la guia
+        new_guia.append(num_autoincremental)
+
+        # Se le agrega el estado al paquete
+        new_package.append('CREADO')
+        # Se le agrega la ID de la guia
+        new_package.append(num_autoincremental)
+
+        packages.append(new_package)
+        guias.append(new_guia)
+        clear_console()
+        print('[PAQUETE CREADO]')
+    else:
+        clear_console()
+        print("Usted ha ingresado un número incorrecto")
+    # if option == 1:
+    #     new_user = gen_inputs_to_dict(User)
+    #     users.append(new_user)
+    # if option == 2:
+    #     new_bill = gen_inputs_to_dict(ElectronicBill)
+    #     bills.append(new_bill)
+    # if option == 3:
+    #     new_package = gen_inputs_to_dict(Package)
+    #     packages.append(new_package)
+    #else:
+        #print("Usted ha ingresado un número incorrecto")

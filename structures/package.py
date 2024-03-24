@@ -4,5 +4,6 @@ package_questions = [
     'Digite la cedula del destinatario',
     'Digite el peso del paquete',
     'Digite el cobro contra entrega',
-    # Estado
+    # Estado,
+    # Numero de guia,
 ]

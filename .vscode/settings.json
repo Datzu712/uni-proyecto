@@ -1,0 +1,10 @@
+{
+    "conventionalCommits.scopes": [
+        "script"
+    ],
+    "discord.enabled": false,
+    "cSpell.words": [
+        "guia",
+        "guias"
+    ]
+}
