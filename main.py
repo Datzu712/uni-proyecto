@@ -55,6 +55,14 @@ while True:
         guias.append(new_guia)
         clear_console()
         print('[PAQUETE CREADO]')
+
+    if option == "3":     
+        clear_console()
+        print('[CREACION DE FACTURA ELECTRONICA]')
+        new_bill = gen_input_to_list(electronic_bill_questions)
+        bills.append(new_electronic_bill)
+        clear_console()
+        print('[FACTURA ELECTRONICA CREADA]')
     elif option == '4':
         print('Saliendo...')
         break
