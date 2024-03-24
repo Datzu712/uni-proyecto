@@ -63,6 +63,7 @@ while True:
         bills.append(new_electronic_bill)
         clear_console()
         print('[FACTURA ELECTRONICA CREADA]')
+        
     elif option == '4':
         print('Saliendo...')
         break
