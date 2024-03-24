@@ -18,6 +18,11 @@ guias = []
 num_autoincremental = 0
 
 while True:
+
+    print(users)
+    print(packages)
+    print(bills)
+    print(guias)
     
     print("Bienvenido a la Mensajería Fidélitas\n")
     print("1. Ingresar un nuevo usuario")
@@ -77,16 +82,13 @@ while True:
         if package == None:
             print("No se ha encontrado el paquete indicado")
         else:
-            package_status = input('Eliga un estado entre (Creado-Recolectado-Entrega Fallida-Entregado): ').upper().strip()
+            package_status = input('Eliga un estado entre (Creado-Recolectado-Entrega Fallida-Entregado): ').upper().replace(' ','')
+            print(package_status)
             if package_status not in ['CREADO','RECOLECTADO','ENTREGAFALLIDA','ENTREGADO']:
                 print('Ha escrito una opción incorrecta')
                 continue
             package[5] = package_status
-            print(package[5])
-            
-            
-            
-
+            print('Estado cambiado con exito')
         
 
     elif option == "4":     
