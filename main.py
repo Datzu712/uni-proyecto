@@ -29,7 +29,7 @@ while True:
     print("2. Ingresar un nuevo paquete")
     print("3. Cambiar estado de un paquete")
     print("4. Ingresar una nueva factura")
-    print("4. Salir\n")
+    print("5. Salir\n")
    
     option = input()
    
@@ -99,7 +99,7 @@ while True:
         clear_console()
         print('[FACTURA ELECTRONICA CREADA]')
         
-    elif option == '4':
+    elif option == '5':
         print('Saliendo...')
         break
     else:
