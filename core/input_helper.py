@@ -1,4 +1,4 @@
-def gen_input_to_list(questions: list) -> list:
+def gen_input_to_list(questions):
     # Lista de inputs del usuario
     data = []
     for question in questions:
