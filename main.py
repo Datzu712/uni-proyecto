@@ -1,5 +1,5 @@
 import os
-
+import random
 from core.input_helper import gen_input_to_list
 from structures.guia import guia_questions
 from structures.package import package_questions
@@ -24,40 +24,65 @@ packages = load_file(PACKAGES_FILE_PATH)
 bills = load_file(BILLS_FILE_PATH)
 guias = load_file(GUIAS_FILE_PATH)
 
-def app():
+
+def user_creation():
+    USERS_FILE_PATH = './data/users.json'
+    users = []
+    encontrado = False
+    while not encontrado:
+        users = load_file(USERS_FILE_PATH)
+        print('Seleccione una opcion antes de comenzar \n1.Iniciar sesion en su cuenta \n2.Registrar una nueva cuenta')
+        option = int(input())
+        if option == 1:
+            usuario = input('Porfavor Ingrese el correo electronico asociado a su cuenta: ')
+            for user in users:
+                if usuario == user[0]:
+                    print(f'Usuario seleccionado: {user[0]}')
+                    password = input('Ingrese la contraseña de la cuenta: ')
+                    print(user[5])
+                    if password == user[5]:
+                        encontrado = False
+                        print('Inicio de sesión exitoso')
+                        app(user[6])
+            print('Usuario no encontrado')
+
+        elif option == 2:
+            clear_console()
+            print('[CREACION DE USUARIO]')
+            new_user = gen_input_to_list(user_questions)
+            id = random.randint(100000, 999999)
+            new_user.append(id)
+            users.append(new_user)
+            save_data(USERS_FILE_PATH, users)
+
+            clear_console()
+            print('[USUARIO CREADO]')
+           
+
+def app(user):
     num_autoincremental = 0
     for guia in guias:
         if guia[5] > num_autoincremental:
             num_autoincremental = guia[5]
 
     print(num_autoincremental)
+    clear_console()
     while True:
         print(users)
         print(packages)
         print(bills)
         print(guias)
-        
+    
         print("Bienvenido a la Mensajería Fidélitas\n")
-        print("1. Ingresar un nuevo usuario")
-        print("2. Ingresar un nuevo paquete")
-        print("3. Cambiar estado de un paquete")
-        print("4. Rastrear un paquete")
-        print("5. Ingresar una nueva factura")
-        print("6. Salir\n")
+        print("1. Ingresar un nuevo paquete")
+        print("2. Cambiar estado de un paquete")
+        print("3. Rastrear un paquete")
+        print("4. Ingresar una nueva factura")
+        print("5. Salir\n")
     
         option = input()
-    
-        if option == "1":     
-            clear_console()
-            print('[CREACION DE USUARIO]')
-            new_user = gen_input_to_list(user_questions)
-            users.append(new_user)
-            save_data(USERS_FILE_PATH, users)
 
-            clear_console()
-            print('[USUARIO CREADO]')
-
-        elif option == "2":
+        if option == "1":
             clear_console()
             print('[CREACION PAQUETE]')
             new_package = gen_input_to_list(package_questions)
@@ -76,6 +101,9 @@ def app():
             # Se le agrega la ID de la guia
             new_package.append(num_autoincremental)
 
+            new_package.append(user)
+            new_guia.append(user)
+
             packages.append(new_package)
             guias.append(new_guia)
 
@@ -85,7 +113,7 @@ def app():
             print('[PAQUETE CREADO]')
             print("El paquete se ha creado con el numero de guia: ", num_autoincremental)
 
-        elif option == "3":
+        elif option == "2":
             
             if len(packages) == 0:
                 print("No hay paquetes")
@@ -112,7 +140,7 @@ def app():
                 save_data(PACKAGES_FILE_PATH, packages)
                 print('Estado cambiado con exito')
 
-        elif option == "4":
+        elif option == "3":
             if len(packages) == 0:
                 print("No hay paquetes")
                 continue
@@ -130,22 +158,23 @@ def app():
             else:
                 print('El Estado de su paquete es', package[5])    
 
-        elif option == "5":     
+        elif option == "4":     
             clear_console()
             print('[CREACION DE FACTURA ELECTRONICA]')
             new_electronic_bill = gen_input_to_list(electronic_bill_questions)
+            new_electronic_bill.append(user)
             bills.append(new_electronic_bill)
             save_data(BILLS_FILE_PATH, bills)
             clear_console()
             print('[FACTURA ELECTRONICA CREADA]')
             
-        elif option == '6':
+        elif option == '5':
             print('Saliendo...')
             break
         else:
             clear_console()
             print("Usted ha ingresado un número incorrecto")
 try:
-    app()
+    user_creation()
 except KeyboardInterrupt:
     print('Saliendo...')
