@@ -26,6 +26,7 @@ guias = load_file(GUIAS_FILE_PATH)
 
 
 def user_creation():
+    
     USERS_FILE_PATH = './data/users.json'
     users = []
     encontrado = False
@@ -60,6 +61,11 @@ def user_creation():
            
 
 def app(user):
+    users = load_file(USERS_FILE_PATH)
+    packages = load_file(PACKAGES_FILE_PATH)
+    bills = load_file(BILLS_FILE_PATH)
+    guias = load_file(GUIAS_FILE_PATH)
+    guias = load_file(GUIAS_FILE_PATH)
     num_autoincremental = 0
     for guia in guias:
         if guia[5] > num_autoincremental:
@@ -78,7 +84,8 @@ def app(user):
         print("2. Cambiar estado de un paquete")
         print("3. Rastrear un paquete")
         print("4. Ingresar una nueva factura")
-        print("5. Salir\n")
+        print("5. Ver estadisticas de la cuenta")
+        print("6. Salir\n")
     
         option = input()
 
@@ -114,6 +121,7 @@ def app(user):
             print("El paquete se ha creado con el numero de guia: ", num_autoincremental)
 
         elif option == "2":
+            packages = load_file(PACKAGES_FILE_PATH)
             
             if len(packages) == 0:
                 print("No hay paquetes")
@@ -158,7 +166,8 @@ def app(user):
             else:
                 print('El Estado de su paquete es', package[5])    
 
-        elif option == "4":     
+        elif option == "4": 
+            bills = load_file(BILLS_FILE_PATH)
             clear_console()
             print('[CREACION DE FACTURA ELECTRONICA]')
             new_electronic_bill = gen_input_to_list(electronic_bill_questions)
@@ -167,8 +176,65 @@ def app(user):
             save_data(BILLS_FILE_PATH, bills)
             clear_console()
             print('[FACTURA ELECTRONICA CREADA]')
+        
+        elif option == "5":
+            clear_console()
+            print('[MODULO DE ESTADISTICAS]')
+            salir = False
+            while not salir:
+                bills = load_file(BILLS_FILE_PATH)
+                guias = load_file(GUIAS_FILE_PATH)
+                packages = load_file(PACKAGES_FILE_PATH)
+                print('Elija una de las siguientes opciones \n1.Mostrar total de envios realizados \n2.Lista de paquetes enviados \n3.Monto de cobro \n4.Cantidad de paquetes enviados por número de telefono \n5.Cantidad de envios por numero de cédula \n6. Salir del modulo de estadisticas')
+                elegir = int(input())
+                
+                if elegir == 1:
+                    paquete_suma = 0
+                    for paquete in packages:
+                        if paquete[7] == user:
+                            paquete_suma+=1
+                    print(f'El total de paquetes enviados es {paquete_suma}')
+
+                elif elegir == 2:
+                    for paquete in packages:
+                        if paquete[7] == user:
+                            print(paquete,'\n')
+
+                elif elegir == 3:
+                    numero_guia = int(input('Ingrese el numeron de guia a consultar:'))
+                    for guia in guias:
+                        if numero_guia == guia[5]:
+                             print(f'El monto de cobro de la guia {numero_guia} es: {guia[4]}')
+                elif elegir == 4:
+                    numero_telefono = input('Ingrese el numero telefonico, para consultar la cantidad de paquetes encontrados bajo ese numero bajo su cuenta: ')
+                    suma_telefono = 0
+                    for paquete in packages:
+                        if paquete[7] == user and paquete[1] == numero_telefono:
+                            suma_telefono+=1 
+                    print(f'El total de paquetes enviados con el numero de telefono {numero_telefono} es {suma_telefono}')
+
+                elif elegir == 5:
+                    numero_cedula = input('Ingrese el numero de cedula, para consultar la cantidad de paquetes encontrados bajo esa cedula bajo su cuenta: ')
+                    suma_cedula = 0
+                    for paquete in packages:
+                        if paquete[7] == user and paquete[2] == numero_cedula:
+                            suma_cedula+=1 
+                    print(f'El total de paquetes enviados con el numero de telefono {numero_cedula} es {suma_cedula}')
+                            
+                            
+                elif elegir == 5:
+                    print(1)
+                elif elegir == 6:
+                    print('Saliendo del modulo de estadísticas')
+                    salir = True 
+
+                else: 
+                    print('Porfavor seleccione una opción valida')
+
+                
+
             
-        elif option == '5':
+        elif option == '6':
             print('Saliendo...')
             break
         else:
