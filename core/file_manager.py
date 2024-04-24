@@ -3,6 +3,8 @@ import os
 
 # path = ruta del archivo
 def load_file(path):
+    print(path)
+    print(os.path.dirname(path))
     if not os.path.exists(path):
         # dir = folder
         # makedirs = make folders
@@ -20,7 +22,10 @@ def save_data(path, content):
         # dumb convierte de lista/objeto/etc a un texto y guarda en el archivo
         dump(content, file)
 
-'''Formato JSON
+
+load_file("./data/users.json")
+
+'''Formato JSON()
 {
     "key": "value"
 }
