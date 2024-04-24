@@ -68,14 +68,12 @@ def app(user_id):
     packages = load_file(PACKAGES_FILE_PATH)
     bills = load_file(BILLS_FILE_PATH)
     guias = load_file(GUIAS_FILE_PATH)
-    guias = load_file(GUIAS_FILE_PATH)
     num_autoincremental = 0
 
     for guia in guias:
         if guia[5] > num_autoincremental:
             num_autoincremental = guia[5]
 
-    print(num_autoincremental)
     clear_console()
     while True:
         print(packages)
@@ -145,7 +143,6 @@ def app(user_id):
                 print("No se ha encontrado el paquete indicado")
             else:
                 package_status = input('Elija un estado entre (Creado-Recolectado-Entrega Fallida-Entregado): ').upper().replace(' ','')
-                print(package_status)
                 if package_status not in ['CREADO','RECOLECTADO','ENTREGAFALLIDA','ENTREGADO']:
                     print('Ha escrito una opción incorrecta')
                     continue
@@ -217,11 +214,12 @@ def app(user_id):
                         print(package)
 
                 elif elegir == 3:
-                    numero_guia = int(input('Ingrese el numeron de guia a consultar:'))
+                    numero_guia = int(input('Ingrese el numero de guia a consultar:'))
                     for guia in guias:
                         if numero_guia == guia[5]:
                             clear_console()
                             print(f'El monto de cobro de la guia {numero_guia} es: {guia[4]}')
+
                 elif elegir == 4:
                     numero_telefono = input('Ingrese el numero telefonico, para consultar la cantidad de paquetes encontrados bajo ese numero bajo su cuenta: ')
                     suma_telefono = 0
@@ -239,8 +237,7 @@ def app(user_id):
                             suma_cedula+=1
                     clear_console()
                     print(f'El total de paquetes enviados con el numero de telefono {numero_cedula} es {suma_cedula}')  
-                elif elegir == 5:
-                    print(1)
+            
                 elif elegir == 6:
                     print('Saliendo del modulo de estadísticas')
                     salir = True 
