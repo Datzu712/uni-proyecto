@@ -23,8 +23,9 @@ def clear_console():
 def user_creation():
     users = load_file(USERS_FILE_PATH)
     encontrado = False
+    exit = False
     while not encontrado:
-        print('Seleccione una opcion antes de comenzar \n1.Iniciar sesión en su cuenta \n2.Registrar una nueva cuenta')
+        print('Seleccione una opcion antes de comenzar \n1.Iniciar sesión en su cuenta \n2.Registrar una nueva cuenta \n3.Salir')
         option = int(input())
         if option == 1:
             target_email = input('Porfavor Ingrese el correo electrónico asociado a su cuenta: ')
@@ -34,10 +35,12 @@ def user_creation():
                     password = input('Ingrese la contraseña de la cuenta: ')
                     print(user[5])
                     if password == user[5]:
-                        encontrado = False
                         print('Inicio de sesión exitoso')
                         app(user[6])
-            print('Usuario no encontrado o contraseña incorrecta')
+                        exit = True
+            if exit == False:
+                print('Usuario no encontrado o contraseña incorrecta')
+
 
         elif option == 2:
             clear_console()
@@ -51,6 +54,14 @@ def user_creation():
 
             clear_console()
             print('[USUARIO CREADO]')
+
+        elif option == 3:
+            print('Saliendo...')
+            encontrado = True
+        else:
+            clear_console()
+            print("Usted ha ingresado un número incorrecto")
+            
            
 
 def app(user_id):
@@ -185,8 +196,8 @@ def app(user_id):
                 elegir = int(input())
                 if elegir == 1:
                     paquete_suma = 0
-                    for paquete in packages:
-                        if paquete[7] == user_id:
+                    for package in packages:
+                        if package[7] == user_id:
                             paquete_suma+=1
                     clear_console()
                     print(f'El total de paquetes enviados es {paquete_suma}')
@@ -194,7 +205,7 @@ def app(user_id):
                 elif elegir == 2:
                     user_packages = []
                     for package in packages:
-                        if paquete[7] == user_id:
+                        if package[7] == user_id:
                             user_packages.append(package)
                     clear_console()
                     if len(user_packages) == 0:
